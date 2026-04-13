@@ -1056,6 +1056,33 @@ pkg_install(
 
 
 
+# Radxa Rock 5B Plus support-
+kernel_build(
+    name = "rock5bplus_defconfig",
+    outs = [
+        ".config",
+    ],
+    build_config = "build.config.rock5bplus",
+    make_goals = [
+        "android_orangepi5_defconfig",
+    ],
+)
+
+kernel_build(
+    name = "rock5bplus",
+    outs = [
+        "arch/arm64/boot/Image",
+        "arch/arm64/boot/dts/rockchip/rk3588-rock-5b-plus.dtb",
+    ],
+    build_config = "build.config.rock5bplus",
+    make_goals = [
+         "Image",
+         "dtbs",
+    ],
+    makefile = "//common:Makefile",
+    kcflags = ["-D__ANDROID_COMMON_KERNEL__"],
+)
+
 # Orangepi 5_pro support-
 kernel_build(
     name = "opi5_pro_defconfig",
